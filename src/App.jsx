@@ -1,11 +1,13 @@
-import { Button } from "@/components/ui/button"
+import { Routes, Route } from "react-router"
+import Home from "./pages/Home"
+import Roadmap from "./pages/Roadmap"
 
 function App() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-4">
-      <h1 className="text-3xl font-bold">shadcn/ui işləyir!</h1>
-      <Button>hazir</Button>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/roadmap" element={<Roadmap />} />
+    </Routes>
   )
 }
 
