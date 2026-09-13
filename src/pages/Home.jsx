@@ -7,11 +7,27 @@ import Header from "../components/Header"
 function Home() {
   const feedbacks = useFeedbackStore((state) => state.feedbacks)
   const activeCategory = useFeedbackStore((state) => state.activeCategory)
+  const sortBy = useFeedbackStore((state) => state.sortBy)
 
   const filteredFeedbacks =
     activeCategory === "All"
       ? feedbacks
       : feedbacks.filter((feedback) => feedback.category === activeCategory.toLowerCase())
+
+      const sortedFeedbacks = [...filteredFeedbacks].sort((a, b) => {
+        switch (sortBy) {
+          case "Most Upvotes":
+            return b.upvotes - a.upvotes
+          case "Least Upvotes":
+            return a.upvotes - b.upvotes
+          case "Most Comments":
+            return b.comments.length - a.comments.length
+          case "Least Comments":
+            return a.comments.length - b.comments.length
+          default:
+            return 0
+        }
+      })
 
 
   return (
@@ -25,7 +41,7 @@ function Home() {
         <div className="flex-1">
           <Header />
           <div className="flex flex-col gap-4">
-            {filteredFeedbacks.map((feedback) => (
+            {sortedFeedbacks.map((feedback) => (
               <FeedbackCard key={feedback.id} feedback={feedback} />
             ))}
           </div>

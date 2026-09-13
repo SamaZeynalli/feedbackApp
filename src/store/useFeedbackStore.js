@@ -5,8 +5,10 @@ export const useFeedbackStore = create((set) => ({
   feedbacks: feedbackData,
 
   activeCategory: "All",
-
   setActiveCategory: (category) => set({ activeCategory: category }),
+
+  sortBy: "Most Upvotes",
+  setSortBy: (sort) => set({ sortBy: sort }),
 
     upvoteFeedback: (id) =>
     set((state) => ({
