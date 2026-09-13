@@ -1,8 +1,15 @@
 import { Button } from "@/components/ui/button"
+import { useFeedbackStore } from "../store/useFeedbackStore"
 
 const categories = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"]
 
+
 function Sidebar() {
+  const activeCategory = useFeedbackStore((state) => state.activeCategory)
+  const setActiveCategory = useFeedbackStore((state) => state.setActiveCategory)
+
+
+
   return (
     <div className="flex flex-col gap-6">
 
@@ -13,7 +20,10 @@ function Sidebar() {
 
       <div className="bg-white rounded-lg p-6 flex flex-wrap gap-3">
         {categories.map((category) => (
-          <Button key={category} variant="secondary" size="sm">
+          <Button key={category} 
+          variant={activeCategory === category ? "default" : "secondary"}
+           size="sm" 
+           onClick={() => setActiveCategory(category)}>
             {category}
           </Button>
         ))}
