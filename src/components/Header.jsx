@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { Link } from "react-router"
 import
  {Select, SelectTrigger, SelectValue, SelectContent, SelectItem} from "@/components/ui/select"
 import { useFeedbackStore } from "../store/useFeedbackStore"
@@ -31,8 +32,8 @@ function Header() {
         </Select>
       </div>
 
-      <Button className="bg-purple-600 hover:bg-purple-700">
-        + Add Feedback
+      <Button asChild className="bg-purple-600 hover:bg-purple-700">
+        <Link to="/new-feedback">+ Add Feedback</Link>
       </Button>
 
     </div>
