@@ -1,6 +1,8 @@
 import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
+import { useNavigate } from "react-router"
+import { useFeedbackStore } from "../store/useFeedbackStore"
 import {
   Select,
   SelectTrigger,
@@ -15,10 +17,12 @@ const feedbackSchema = z.object({
   description: z.string().min(1, "Təsvir boş ola bilməz"),
 })
 
+
 function NewFeedback() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(feedbackSchema),
@@ -29,8 +33,12 @@ function NewFeedback() {
     },
   })
 
+  const navigate = useNavigate()
+  const addFeedback = useFeedbackStore((state) => state.addFeedback)
+
   const onSubmit = (data) => {
-    console.log("Forma göndərildi:", data)
+    addFeedback(data)
+    navigate("/")
   }
 
   return (

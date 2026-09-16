@@ -18,4 +18,14 @@ export const useFeedbackStore = create((set) => ({
           : feedback
       ),
     })),
+
+  addFeedback: (newFeedback) =>
+    set((state) => ({
+      feedbacks: [...state.feedbacks, {
+        id: Date.now(),
+        upvotes: 0,
+        comments: [],
+        ...newFeedback,
+      }],
+    }))
 }))
